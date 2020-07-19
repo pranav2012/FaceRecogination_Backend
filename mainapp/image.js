@@ -9,7 +9,10 @@ const apihandler = (req, res) => {
     app.models
         .predict(Clarifai.FACE_DETECT_MODEL, input)
         .then(data => {
-            res.json(data);
+            res.json({
+                status:'sucess',
+                data:data
+            });
         })
         .catch(err => res.status(400).json('error fetching api'))
 }
