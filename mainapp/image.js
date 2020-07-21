@@ -4,10 +4,23 @@ const app = new Clarifai.App({
     apiKey: '7c65fa7452474f8b8f83340c0d1a6e75'
 });
 
+const imgfilehandler = (req,res) =>{
+    const {file} = req.body;
+    app.models
+        .predict(Clarifai.FACE_DETECT_MODEL,{base64:file})
+        .then(data => {
+            res.json({
+                status:'sucess',
+                data:data
+            });
+        })
+        .catch(err => res.status(400).json('error fetching api'))
+}
+
 const apihandler = (req, res) => {
     const { input } = req.body;
     app.models
-        .predict(Clarifai.FACE_DETECT_MODEL, input)
+        .predict(Clarifai.FACE_DETECT_MODEL,input)
         .then(data => {
             res.json({
                 status:'sucess',
@@ -28,5 +41,6 @@ const imgcounthandler = (req, res, db) => {
 
 module.exports = {
     apihandler,
-    imgcounthandler
+    imgcounthandler,
+    imgfilehandler
 }

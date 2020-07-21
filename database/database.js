@@ -7,6 +7,10 @@ const db = knex({
     ssl: {
       rejectUnauthorized: false
     }
+    /*host : '127.0.0.1',
+    user : 'postgres',
+    password : 'mynameisp',
+    database : 'facerec'*/
   }
 });
 
