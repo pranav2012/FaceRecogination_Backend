@@ -10,8 +10,17 @@ const signuphandler = (req, res, db ,bcrypt) => {
             username: username,
             hash: hash
         })
-        .then(result => res.json('sucess'))
-        .catch(err => res.status(400).json('error'))
+        .then(result => {
+            db.select('id', 'email', 'name','enteries').from('users').where('email', '=', email)
+            .then(user=>{
+                res.json({
+                    status: 'sucess',
+                    username: user[0].name,
+                    enteries: user[0].enteries,
+                    id: user[0].id,
+                });
+            }).catch(err=> res.status(400).json('no such user'));
+        }).catch(err => res.status(400).json('error'));
 }
 
 module.exports = {

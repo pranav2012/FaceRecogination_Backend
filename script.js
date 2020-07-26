@@ -20,16 +20,20 @@ app.post('/login', (req,res) => {login.loginhandler(req,res,db,bcrypt)})
 
 app.post('/register', (req,res)=>{signup.signuphandler(req,res,db,bcrypt)});
 
-app.post('/frgtpass', (req,res) => {frgtpass.frgtpasshandler(req,res,db,bcrypt)});
+app.post('/frgtpass', (req,res) => {frgtpass.frgtpasshandler(req,res)});
+
+app.put('/passreset', (req,res) => {frgtpass.resetpasshandler(req,res,db,bcrypt)});
 
 app.get('/profile/:id', (req,res)=>{profile.profilehandler(req,res,db)});
 
 app.post('/imageurl', (req, res) => {image.apihandler(req,res)});
 
-app.put('/image',(req,res)=>{image.imgcounthandler(req,res,db)});
+app.put('/image', (req,res) => {image.imgcounthandler(req,res,db)});
 
-app.post('/upload',(req,res)=>{image.imgfilehandler(req,res)});
+app.post('/upload', (req,res) => {image.imgfilehandler(req,res)});
 
 app.post('/gauth', (req,res) => {google.googleauthchecker(req,res,db,bcrypt)});
+
+app.post('/gregister', (req,res) => {google.googleregister(req,res,db,bcrypt)});
 
 app.listen(port, () => console.log(`running on port ${port}`));
