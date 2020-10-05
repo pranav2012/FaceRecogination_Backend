@@ -27,8 +27,6 @@ app.put('/image', (req,res) => {image.imgcounthandler(req,res,db)});
 
 app.post('/upload', (req,res) => {image.imgfilehandler(req,res)});
 
-app.post('/gauth', (req,res) => {google.googleauthchecker(req,res,db,bcrypt)});
-
-app.post('/gregister', (req,res) => {google.googleregister(req,res,db,bcrypt)});
+app.post('/gauth', (req,res) => {google.googleauth(req,res,db,bcrypt)});
 
 app.listen(port, () => console.log(`running on port ${port}`));
