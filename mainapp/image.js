@@ -14,7 +14,10 @@ const imgfilehandler = (req,res) =>{
                 data:data
             });
         })
-        .catch(err => res.status(400).json('error file fetching api'))
+        .catch(err => {
+            console.log('error: ' + err);
+            res.status(400).json('error file fetching api');
+        });
 }
 
 const apihandler = (req, res) => {
@@ -27,7 +30,10 @@ const apihandler = (req, res) => {
                 data:data
             });
         })
-        .catch(err => res.status(400).json('error url fetching api'))
+        .catch(err => {
+            console.log('error: ' + err);
+            res.status(400).json('error url fetching api');
+        });
 }
 
 const imgcounthandler = (req, res, db) => {
