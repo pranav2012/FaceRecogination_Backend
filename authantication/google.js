@@ -23,13 +23,14 @@ const googleregister = (req, res, db, bcrypt) => {
             username: username,
             hash: hash
         }).then(result => {
-            db.select('id', 'email', 'name').from('users').where('email', '=', email)
+            db.select('id', 'email', 'name', 'enteries').from('users').where('email', '=', email)
                 .then(user => {
                     send_mail.sendmail(user[0].email,user[0].name);
                     res.json({
                         status: 'sucess',
                         username: user[0].name,
                         id: user[0].id,
+                        enteries: user[0].enteries
                     });
                 }).catch(err => res.status(400).json('email error!'));
         }).catch(err => res.status(400).json('error registering in!'));
@@ -38,12 +39,13 @@ const googleregister = (req, res, db, bcrypt) => {
 const googleauthchecker = (req, res, db) => {
     const { email } = req.body;
     console.log('login')
-    db.select('id', 'email', 'name').from('users').where('email', '=', email)
+    db.select('id', 'email', 'name', 'enteries').from('users').where('email', '=', email)
         .then(user => {
             res.json({
                 status: 'sucess',
                 username: user[0].name,
                 id: user[0].id,
+                enteries: user[0].enteries
             });
         }).catch(err => res.status(400).json('error logging in!'));
 }
